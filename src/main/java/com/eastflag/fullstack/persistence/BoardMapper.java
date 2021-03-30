@@ -18,8 +18,11 @@ public interface BoardMapper {
     @Select({"<script>",
             "SELECT * from board",
             "order by id desc",
+            "<if test='offset != null and page_size != null'>",
+            "LIMIT #{offset}, #{page_size}",
+            "</if>",
             "</script>"})
-    List<BoardVO> findBoard();
+    List<BoardVO> findBoard(Integer offset, Integer page_size);
 
     @Select({"<script>",
             "SELECT * from board",

@@ -4,6 +4,7 @@ import com.eastflag.fullstack.domain.BoardVO;
 import com.eastflag.fullstack.domain.ResultVO;
 import com.eastflag.fullstack.persistence.BoardMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,7 +31,11 @@ public class BoardController {
     }
 
     @GetMapping("/boards")
-    public List<BoardVO> findAllBoard() {
-        return boardMapper.findBoard();
+    public List<BoardVO> findAllBoard(@RequestParam @Nullable Integer page_number, @RequestParam @Nullable Integer page_size) {
+        Integer offset = null;
+        if (page_number != null && page_size != null) {
+            offset = (page_number - 1) * page_size;
+        }
+        return boardMapper.findBoard(offset, page_size);
     }
 }

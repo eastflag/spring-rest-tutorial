@@ -58,4 +58,9 @@ public class BoardController {
             return new ResultVO(100, "fail");
         }
     }
+
+    @GetMapping("/board/count")
+    public Integer countBoard() {
+        return boardMapper.countBoard();
+    }
 }

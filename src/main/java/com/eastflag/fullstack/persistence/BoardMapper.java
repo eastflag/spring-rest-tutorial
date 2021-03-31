@@ -43,4 +43,9 @@ public interface BoardMapper {
             "WHERE id = #{id}",
             "</script>"})
     int deleteBoard(int id);
+
+    @Select({"<script>",
+            "SELECT count(*) from board",
+            "</script>"})
+    Integer countBoard();
 }

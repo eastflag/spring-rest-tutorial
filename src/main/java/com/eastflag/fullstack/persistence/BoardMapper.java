@@ -4,6 +4,7 @@ import com.eastflag.fullstack.domain.BoardVO;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -29,4 +30,14 @@ public interface BoardMapper {
             "where id = #{id}",
             "</script>"})
     BoardVO findOneBoard(int id);
+
+    @Update({"<script>",
+            "UPDATE board",
+            "<trim prefix='set' suffixOverrides=','>",
+            "<if test='title != null'>title = #{title},</if>",
+            "<if test='content != null'>content = #{content},</if>",
+            "</trim>",
+            "WHERE id = #{id}",
+            "</script>"})
+    int updateBoard(BoardVO boardVO);
 }

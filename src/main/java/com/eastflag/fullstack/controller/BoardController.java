@@ -48,4 +48,14 @@ public class BoardController {
             return new ResultVO(100, "fail");
         }
     }
+
+    @DeleteMapping("/board")
+    public ResultVO removeBoard(@RequestParam int id) {
+        int result = boardMapper.deleteBoard(id);
+        if (result > 0) {
+            return new ResultVO(0, "success");
+        } else {
+            return new ResultVO(100, "fail");
+        }
+    }
 }

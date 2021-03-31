@@ -1,10 +1,7 @@
 package com.eastflag.fullstack.persistence;
 
 import com.eastflag.fullstack.domain.BoardVO;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -40,4 +37,10 @@ public interface BoardMapper {
             "WHERE id = #{id}",
             "</script>"})
     int updateBoard(BoardVO boardVO);
+
+    @Delete({"<script>",
+            "DELETE FROM board",
+            "WHERE id = #{id}",
+            "</script>"})
+    int deleteBoard(int id);
 }

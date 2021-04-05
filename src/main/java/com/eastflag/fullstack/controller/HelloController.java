@@ -25,6 +25,16 @@ public class HelloController {
         return "Hello" + name;
     }
 
+    @PostMapping("/hello33")
+    public String hello33(@RequestParam("name") String name) {
+        return "Hello" + name;
+    }
+
+    @PostMapping("/hello4")
+    public String hello4(@RequestParam String name) {
+        return "Hello " + name;
+    }
+
     @PostMapping("/hello5")
     public ResultVO hello5(@RequestParam("name") String name) {
         ResultVO result = new ResultVO(0, name);

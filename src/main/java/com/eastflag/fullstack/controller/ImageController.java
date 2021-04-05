@@ -1,10 +1,8 @@
 package com.eastflag.fullstack.controller;
 
-import com.eastflag.fullstack.domain.BoardVO;
 import com.eastflag.fullstack.domain.ImageVO;
 import com.eastflag.fullstack.persistence.ImageMapper;
 import lombok.RequiredArgsConstructor;
-import org.apache.ibatis.annotations.Select;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +13,7 @@ import java.io.IOException;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/image")
+@RequestMapping("/api/image")
 public class ImageController {
     private final ImageMapper imageMapper;
 

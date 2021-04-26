@@ -17,13 +17,9 @@ public class CommentController {
     private final CommentMapper commentMapper;
 
     @PostMapping("/comment")
-    public ResultVO addComment(@RequestBody CommentVO commentVO) {
-        int result = commentMapper.insertComment(commentVO);
-        if (result > 0) {
-            return new ResultVO(0, "success");
-        } else {
-            return new ResultVO(100, "fail");
-        }
+    public CommentVO addComment(@RequestBody CommentVO commentVO) {
+        commentMapper.insertComment(commentVO);
+        return commentVO;
     }
 
     @GetMapping("/comments")

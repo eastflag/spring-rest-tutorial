@@ -3,10 +3,12 @@ package com.eastflag.fullstack.persistence;
 import com.eastflag.fullstack.domain.CommentVO;
 import org.apache.ibatis.annotations.*;
 
+import javax.annotation.Generated;
 import java.util.List;
 
 @Mapper
 public interface CommentMapper {
+    @Options(useGeneratedKeys = true, keyProperty = "id")
     @Insert({"<script>",
             "INSERT INTO comment(content, board_id)",
             "VALUES(#{content}, #{board_id})",
@@ -27,7 +29,7 @@ public interface CommentMapper {
     int updateComment(CommentVO commentVO);
 
     @Delete({"<script>",
-            "DELETE FROM board",
+            "DELETE FROM comment",
             "WHERE id = #{id}",
             "</script>"})
     int deleteComment(int id);

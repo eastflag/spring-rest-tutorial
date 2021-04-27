@@ -1,11 +1,9 @@
 package com.eastflag.fullstack.controller;
 
-import com.eastflag.fullstack.domain.BoardVO;
 import com.eastflag.fullstack.domain.CommentVO;
 import com.eastflag.fullstack.domain.ResultVO;
 import com.eastflag.fullstack.persistence.CommentMapper;
 import lombok.RequiredArgsConstructor;
-import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,6 +18,11 @@ public class CommentController {
     public CommentVO addComment(@RequestBody CommentVO commentVO) {
         commentMapper.insertComment(commentVO);
         return commentVO;
+    }
+
+    @GetMapping("/comment")
+    public CommentVO findOneComment(@RequestParam Integer id) {
+        return commentMapper.findOneComment(id);
     }
 
     @GetMapping("/comments")

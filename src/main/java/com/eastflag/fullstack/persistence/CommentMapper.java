@@ -3,7 +3,6 @@ package com.eastflag.fullstack.persistence;
 import com.eastflag.fullstack.domain.CommentVO;
 import org.apache.ibatis.annotations.*;
 
-import javax.annotation.Generated;
 import java.util.List;
 
 @Mapper
@@ -14,6 +13,12 @@ public interface CommentMapper {
             "VALUES(#{content}, #{board_id})",
             "</script>"})
     int insertComment(CommentVO commentVO);
+
+    @Select({"<script>",
+            "SELECT * from comment",
+            "where id = #{id}",
+            "</script>"})
+    CommentVO findOneComment(int id);
 
     @Select({"<script>",
             "SELECT * from comment",

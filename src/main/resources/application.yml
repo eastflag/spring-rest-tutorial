@@ -4,3 +4,7 @@ spring:
     url: "jdbc:mysql://localhost:3306/eastdb"
     username: "eastflag"
     password: "12345678"
+app:
+  jwt:
+    secret: 11112222
+    expirationMs: 86400000

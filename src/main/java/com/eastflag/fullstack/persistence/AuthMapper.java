@@ -18,6 +18,12 @@ public interface AuthMapper {
     UserVO findOneByEmail(String email);
 
     @Select({"<script>",
+            "SELECT R.name FROM user_role UR inner join role R on UR.role_id = R.id",
+            "WHERE UR.user_id = #{user_id}",
+            "</script>"})
+    List<String> findRoles(Long user_id);
+
+    @Select({"<script>",
             "SELECT count(*) from user",
             "WHERE email = #{email}",
             "</script>"})

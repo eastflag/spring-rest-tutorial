@@ -34,13 +34,14 @@ public class JwtUtils {
 
         Map<String, Object> rolesMap = new HashMap<>();
         rolesMap.put("roles", roles);
+        rolesMap.put("email", userPrincipal.getEmail());
 
         return Jwts.builder()
+                .setClaims(rolesMap)
                 .setId(userPrincipal.getId().toString())
                 .setSubject((userPrincipal.getUsername()))
                 .setIssuedAt(new Date())
                 .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
-                .setClaims(rolesMap)
                 .signWith(SignatureAlgorithm.HS512, jwtSecret)
                 .compact();
     }

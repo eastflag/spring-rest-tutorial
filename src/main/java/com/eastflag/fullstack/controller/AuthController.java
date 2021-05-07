@@ -17,20 +17,16 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
-    @Autowired
-    AuthenticationManager authenticationManager;
 
-    @Autowired
-    PasswordEncoder encoder;
+    private final AuthenticationManager authenticationManager;
+    private final PasswordEncoder encoder;
 
     @Autowired
     JwtUtils jwtUtils;
@@ -40,24 +36,24 @@ public class AuthController {
 
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody UserVO loginRequest) {
-        System.out.println("1: " + loginRequest);
+        UserVO user = authMapper.findOneByEmail(loginRequest.getEmail());
+        if (user == null) {
+            return ResponseEntity.badRequest().body("없는 아이디입니다.");
+        }
+        if (!encoder.matches(loginRequest.getPassword(), user.getPassword())) {
+            return ResponseEntity.badRequest().body("잘못된 비밀번호입니다.");
+        }
 
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
 
-        System.out.println("2: " + authentication);
-
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = jwtUtils.generateJwtToken(authentication);
-
-        System.out.println("3: " + jwt);
 
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
         List<String> roles = userDetails.getAuthorities().stream()
                 .map(item -> item.getAuthority())
                 .collect(Collectors.toList());
-
-        System.out.println("4: " + userDetails);
 
         return ResponseEntity.ok(new LoginVO(jwt,
                 userDetails.getId(),

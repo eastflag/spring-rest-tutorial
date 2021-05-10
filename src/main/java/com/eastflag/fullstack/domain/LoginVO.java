@@ -9,8 +9,4 @@ import java.util.List;
 @AllArgsConstructor
 public class LoginVO {
     private String jwt;
-    private Long id;
-    private String username;
-    private String email;
-    private List<String> roles;
 }

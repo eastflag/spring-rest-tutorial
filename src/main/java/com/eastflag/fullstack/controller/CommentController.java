@@ -25,7 +25,7 @@ public class CommentController {
         return commentMapper.findOneComment(id);
     }
 
-    @GetMapping("/comments")
+    @GetMapping("/comment/list")
     public List<CommentVO> findAllComment(@RequestParam Integer board_id) {
         List<CommentVO> comments = commentMapper.findComment(board_id);
 

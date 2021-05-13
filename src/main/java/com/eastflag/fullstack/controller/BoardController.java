@@ -30,7 +30,7 @@ public class BoardController {
         return boardMapper.findOneBoard(id);
     }
 
-    @GetMapping("/boards")
+    @GetMapping("/board/list")
     public List<BoardVO> findAllBoard(@RequestParam @Nullable Integer page_number, @RequestParam @Nullable Integer page_size) {
         Integer offset = null;
         if (page_number != null && page_size != null) {

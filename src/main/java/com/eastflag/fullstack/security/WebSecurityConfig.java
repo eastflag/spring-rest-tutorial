@@ -55,8 +55,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and() // 세션 사용안함
                 .authorizeRequests()
-                .antMatchers("/api/admin").hasRole("ADMIN")
-                .antMatchers("/api/moderator").hasRole("MODERATOR")
+                .antMatchers("/api/admin/**").hasRole("ADMIN")
+                .antMatchers("/api/moderator/**").hasRole("MODERATOR")
                 .antMatchers("/api/auth/**").permitAll()
                 .anyRequest().authenticated();
 
